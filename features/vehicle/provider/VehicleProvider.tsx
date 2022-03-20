@@ -30,7 +30,7 @@ const VehicleProvider = ({ children }) => {
         .finally(() => setLoading(false)))();
   }, []);
 
-  const data = { vehicle, loading, setLoading, error };
+  const data = { vehicle, loading, setLoading, error, getVehicle };
 
   return (
     <VehicleContext.Provider value={data}>{children}</VehicleContext.Provider>
