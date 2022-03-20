@@ -5,12 +5,13 @@ const VehicleStatusCard = ({ data, loading }) => {
 
   if (loading) return <div>Carregando...</div>;
 
+  if (!model) return <p>Ops, não foi possível carregar seu veículo</p>;
+
   return (
     <div>
-      <div>
-        <p>{model}</p>
-        <p>{manufacturer}</p>
-      </div>
+      <h2>Vehicle</h2>
+      <p>{model}</p>
+      <p>{manufacturer}</p>
     </div>
   );
 };

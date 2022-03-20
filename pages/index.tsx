@@ -13,8 +13,6 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      {console.log(vehicle)}
-
       <VehicleStatusCard data={vehicle} loading={loading} />
       {/* <DebitsCard /> */}
       {/* <CnhStatusCard /> */}

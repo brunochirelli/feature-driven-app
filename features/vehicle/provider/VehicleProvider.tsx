@@ -6,27 +6,31 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
+import { getVehicle } from "../service/vehicleApi";
 
 interface VehicleContextProps {
   vehicle: any;
   loading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
+  error: boolean;
 }
 
 const VehicleContext = createContext<VehicleContextProps | null>(null);
 
 const VehicleProvider = ({ children }) => {
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [vehicle, setVehicle] = useState({ manufacturer: "", model: "" });
 
   useEffect(() => {
-    fetch("https://swapi.dev/api/vehicles/4/")
-      .then((data) => data.json())
-      .then(setVehicle)
-      .finally(() => setLoading(false));
+    (async () =>
+      getVehicle(4)
+        .then(setVehicle)
+        .catch((err) => setError(err))
+        .finally(() => setLoading(false)))();
   }, []);
 
-  const data = { vehicle, loading, setLoading };
+  const data = { vehicle, loading, setLoading, error };
 
   return (
     <VehicleContext.Provider value={data}>{children}</VehicleContext.Provider>
