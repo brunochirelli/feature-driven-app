@@ -18,11 +18,13 @@ export default function Home() {
   const { user } = useUser();
   const { debit } = useDebit();
 
+  if (loading) return <div>Carregando...</div>;
+
   return (
     <div className={styles.container}>
-      <Greeting name={user.name} loading={loading} />
-      <VehicleStatusCard data={vehicle} loading={loading} />
-      <DebitsCard data={debit} loading={loading} />
+      <Greeting name={user.name} />
+      <VehicleStatusCard data={vehicle} />
+      <DebitsCard data={debit} />
       {/* <CnhStatusCard /> */}
       {/* <CrlvStatusCard /> */}
     </div>

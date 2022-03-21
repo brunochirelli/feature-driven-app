@@ -1,25 +1,17 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { createContext, useContext, useState, useEffect } from "react";
+import { useApp } from "../../common/provider/AppProvider";
 import { getVehicle } from "../service/vehicleApi";
 
 interface VehicleContextProps {
   vehicle: any;
-  loading: boolean;
-  setLoading: Dispatch<SetStateAction<boolean>>;
   error: boolean;
 }
 
 const VehicleContext = createContext<VehicleContextProps | null>(null);
 
 const VehicleProvider = ({ children }) => {
+  const { setLoading } = useApp();
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [vehicle, setVehicle] = useState({ manufacturer: "", model: "" });
 
   useEffect(() => {
@@ -30,7 +22,7 @@ const VehicleProvider = ({ children }) => {
         .finally(() => setLoading(false)))();
   }, []);
 
-  const data = { vehicle, loading, setLoading, error, getVehicle };
+  const data = { vehicle, error, getVehicle };
 
   return (
     <VehicleContext.Provider value={data}>{children}</VehicleContext.Provider>

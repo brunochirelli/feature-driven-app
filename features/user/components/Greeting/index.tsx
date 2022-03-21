@@ -2,12 +2,9 @@ import React from "react";
 
 type GreetingProps = {
   name: string;
-  loading: boolean;
 };
 
-const Greeting = ({ name, loading }: GreetingProps) => {
-  if (loading) return null;
-
+const Greeting = ({ name }: GreetingProps) => {
   return <p>Bem-vindo {name}!</p>;
 };
 
