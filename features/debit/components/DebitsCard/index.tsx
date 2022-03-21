@@ -1,9 +1,15 @@
 import React from "react";
 
-const DebitsCard = () => {
+const DebitsCard = ({ data, loading }) => {
+  const { name, terrain } = data;
+
+  if (loading) return null;
+
   return (
     <div>
-      <h1>Debits card...</h1>
+      <h2>Debits</h2>
+      <p>{name}</p>
+      <p>{terrain}</p>
     </div>
   );
 };
