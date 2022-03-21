@@ -1,4 +1,4 @@
-const baseUrl = "https://swapi.dev/api/peoples";
+const baseUrl = "https://swapi.dev/api/people";
 
 const getUser = async (id) => {
   const url = `${baseUrl}/${id}`;
