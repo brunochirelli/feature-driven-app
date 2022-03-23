@@ -12,14 +12,16 @@ const DebitProvider = ({ children }) => {
   const { setLoading } = useApp();
   const [debit, setDebit] = useState({});
 
-  const data = { debit, getDebit };
-
   useEffect(() => {
+    setLoading(true);
+
     (async () =>
       getDebit(1)
         .then(setDebit)
         .finally(() => setLoading(false)))();
   }, []);
+
+  const data = { debit, getDebit };
 
   return <DebitContext.Provider value={data}>{children}</DebitContext.Provider>;
 };

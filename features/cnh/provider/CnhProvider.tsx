@@ -6,20 +6,21 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
+import { useApp } from "../../common/provider/AppProvider";
 
 interface CnhContextProps {
   vehicle: any;
-  loading: boolean;
-  setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 const CnhContext = createContext<CnhContextProps | null>(null);
 
 const CnhProvider = ({ children }) => {
-  const [loading, setLoading] = useState(true);
+  const { setLoading } = useApp();
   const [vehicle, setVehicle] = useState({ manufacturer: "", model: "" });
 
   const getVehicle = () => {
+    setLoading(true);
+
     fetch("https://swapi.dev/api/vehicles/4/")
       .then((data) => data.json())
       .then(setVehicle)
@@ -30,7 +31,7 @@ const CnhProvider = ({ children }) => {
     getVehicle();
   }, []);
 
-  const data = { vehicle, loading, setLoading };
+  const data = { vehicle };
 
   return <CnhContext.Provider value={data}>{children}</CnhContext.Provider>;
 };

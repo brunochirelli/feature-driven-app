@@ -11,6 +11,8 @@ import { useUser } from "../features/user/provider/UserProvider";
 import Greeting from "../features/user/components/Greeting";
 import { useDebit } from "../features/debit/provider/DebitProvider";
 import { useApp } from "../features/common/provider/AppProvider";
+import Counter from "../features/user/components/Counter";
+import AddButton from "../features/user/components/AddButton";
 
 export default function Home() {
   const { loading } = useApp();
@@ -25,6 +27,8 @@ export default function Home() {
       <Greeting name={user.name} />
       <VehicleStatusCard data={vehicle} />
       <DebitsCard data={debit} />
+      <Counter />
+      <AddButton />
       {/* <CnhStatusCard /> */}
       {/* <CrlvStatusCard /> */}
     </div>

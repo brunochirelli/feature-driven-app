@@ -1,9 +1,18 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useApp } from "../../common/provider/AppProvider";
 import { getUser } from "../service/userApi";
 
 interface UserContextProps {
   user: any;
+  count: number;
+  setCount: Dispatch<SetStateAction<number>>;
 }
 
 const UserContext = createContext<UserContextProps | null>(null);
@@ -12,6 +21,7 @@ const UserProvider = ({ children }) => {
   const { setLoading } = useApp();
 
   const [user, setUser] = useState({ name: "", planet: "" });
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     setLoading(true);
@@ -22,10 +32,11 @@ const UserProvider = ({ children }) => {
         .finally(() => setLoading(false)))();
   }, []);
 
-  const data = { user, getUser };
+  const data = { user, getUser, count, setCount };
 
   return <UserContext.Provider value={data}>{children}</UserContext.Provider>;
 };
+
 const useUser = () => {
   const context = useContext(UserContext);
 
