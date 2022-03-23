@@ -15,6 +15,8 @@ const VehicleProvider = ({ children }) => {
   const [vehicle, setVehicle] = useState({ manufacturer: "", model: "" });
 
   useEffect(() => {
+    setLoading(true);
+
     (async () =>
       getVehicle(4)
         .then(setVehicle)
